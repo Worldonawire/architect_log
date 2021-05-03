@@ -19,6 +19,9 @@
   "homepage": "https://github.com/Worldonawire/cc19-solo-mvp-project#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.5.0",
+    "lodash": "^4.17.21",
     "nodemon": "^2.0.7"
   }
 }
