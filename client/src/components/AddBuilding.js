@@ -39,7 +39,9 @@ function AddBuilding() {
 
     return (
         <div>
+        
             <form id="add-building">
+            <h2>Add Building Info:</h2>
                 <div className="field">
                     <label>Building name:</label>
                     <input type="text" onChange={(e)=>{setName(e.target.value)}}/> 

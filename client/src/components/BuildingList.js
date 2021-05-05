@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 // import { graphql } from 'react-apollo';
 import {getBuildingsQuery} from "../GraphQL/Queries"
+import BuildingDetails from "./BuildingDetails"
 
 
 
 function BuildingList() {
+    const [buildingInfo, setBuildingInfo] = useState("")
 
     const {error, loading, data } = useQuery(getBuildingsQuery);
     console.log(data);
@@ -22,11 +24,12 @@ function BuildingList() {
     return (
         <div>
             {" "}
-            <ul>
+            <ul id="building-list">
             {listbuilding.map((val)=> {
-              return <li key={val.id}>{val.name}</li>
-            })}   
+              return <li key={val.id} onClick={(e)=> {setBuildingInfo(val.id)}}>{val.name}</li>
+            })}  
             </ul>
+            <BuildingDetails buildingInfo={buildingInfo}/>
         </div>
     );
 }

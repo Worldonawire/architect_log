@@ -51,10 +51,14 @@ const client = new ApolloClient({
 
 
 function App() {
+ 
+
+
+
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <h1>My Architect List</h1>
+      <div className="main">
+        <h1>Architect's Log</h1>
         <BuildingList />
         <AddBuilding />
       </div>

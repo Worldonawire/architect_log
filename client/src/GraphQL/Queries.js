@@ -20,4 +20,23 @@ const getBuildingsQuery = gql`
   }
 `
 
-export {getBuildingsQuery, getArchitectsQuery};
+const getBuildingQuery = gql`
+  query($id: ID) {
+    building(id: $id) {
+      id
+      name
+      location
+      architect {
+        id
+        name
+        nationality
+        buildings{
+          name
+          id
+        }
+      }
+    }
+  }
+`
+
+export {getBuildingsQuery, getArchitectsQuery, getBuildingQuery};
