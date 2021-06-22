@@ -23,13 +23,14 @@ import {
   ApolloProvider,
   HttpLink,
   from,
-  gql
+  // gql
 
   } from "@apollo/client";
 import { onError } from '@apollo/client/link/error'
 
 const errorLink = onError(({ graphqlErrors, networkError}) => {
   if (graphqlErrors) {
+    // eslint-disable-next-line array-callback-return
     graphqlErrors.map(({message, location, path}) => {
       alert(`Graphql error ${message}`)
     })
