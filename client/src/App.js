@@ -39,7 +39,7 @@ const errorLink = onError(({ graphqlErrors, networkError}) => {
 
 const link = from([
   errorLink,
-  new HttpLink({ uri: 'http://localhost:5000/graphql' })
+  new HttpLink({ uri: '/graphql' })
 ])
 // const link = new HttpLink({ uri: 'http://localhost:5000/graphql' })
 
@@ -52,10 +52,6 @@ const client = new ApolloClient({
 
 
 function App() {
- 
-
-
-
   return (
     <ApolloProvider client={client}>
       <div className="main">
