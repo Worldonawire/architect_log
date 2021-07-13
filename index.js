@@ -1,5 +1,5 @@
 const express = require('express');
-const { graphqlHTTP } = require('express-graphql');
+const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -20,6 +20,7 @@ app.get('*', (req, res) => {
 // connect to mondgoDB database
 
 mongoose.connect(process.env.MONGODB_URI, {useUnifiedTopology: true, useNewUrlParser: true});
+// mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.once('open', ()=>{
     console.log('connected to database')
@@ -30,6 +31,8 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 
 }));
+
+
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {

@@ -10,3 +10,13 @@ export const addBuildingMutation = gql`
   }
 
 `
+
+export const addArchitectMutation = gql`
+  mutation($name: String!, $nationality: String!){
+    addArchitect(name: $name, nationaliy:$nationality){
+      name
+      id
+    }
+  }
+
+`
