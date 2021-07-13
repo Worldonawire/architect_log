@@ -15,7 +15,7 @@ const getBuildingsQuery = gql`
   query {
     architects{
       name
-      id
+      id 
     }
   }
 `

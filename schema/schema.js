@@ -2,6 +2,7 @@ const graphql = require('graphql');
 const _ = require('lodash');
 const Building = require('../models/building');
 const Architect = require('../models/architect');
+const mongoose = require('mongoose');
 
 const { 
     GraphQLObjectType, 
@@ -26,7 +27,27 @@ const {
 //     {name: "Naitou", nationality: "Japanese", id: "2"},
 //     {name: "Sekkei", nationality: "Japanese", id: "3"},
 // ]
-
+/*
+{
+    "errors": [
+      {
+        "message": "ID cannot represent value: { _bsontype: \"ObjectID\", id: <Buffer 60 e9 20 ee 02 36 38 23 d4 02 fd f2> }",
+        "locations": [
+          {
+            "line": 10,
+            "column": 5
+          }
+        ],
+        "path": [
+          "events",
+          0,
+          "_id"
+        ]
+      }
+    ],
+    "data": null
+  }
+*/
 const BuildingType = new GraphQLObjectType({
     name: 'Building',
     fields: () => ({
@@ -36,8 +57,10 @@ const BuildingType = new GraphQLObjectType({
         architect: {
             type: ArchitectType,
             resolve(parent, args) {
-                console.log(parent);
+                // console.log(parent);
                 // return _.find(architects, {id: parent.architectId})
+                // return Architect.find(parent.architectId)
+                //return Architect.find({ id: parent.architectId })
                 return Architect.findById(parent.architectId)
             }
         }
@@ -54,7 +77,8 @@ const ArchitectType = new GraphQLObjectType({
             type: new GraphQLList(BuildingType),
             resolve(parent, args) {
                 // return _.filter(buildings, {architectId: parent.id});
-                return Building.find({ architectId: parent.id})
+                return Building.find({ architectId: parent.id })
+                
             }
         }
     })
@@ -68,6 +92,8 @@ const RootQuery = new GraphQLObjectType({
             type: BuildingType,
             args: { id: {type: GraphQLID}},
             resolve(parent, args) {
+                if(!args.id) return false;
+                //if( !mongoose.Types.ObjectId.isValid(id) ) return false;
                 // code to get data from db / other source
                 // return _.find(buildings, {id: args.id })
                 return Building.findById(args.id)
@@ -126,10 +152,10 @@ const Mutation = new GraphQLObjectType({
             },
             resolve(parent, args) {
                 let building = new Building({
-                    name: args.name,
-                    location: args.location,
-                    architectId: args.architectId
-                });
+                        name: args.name,
+                        location: args.location,
+                        architectId: args.architectId
+                    })
                 return building.save();
             }
         }

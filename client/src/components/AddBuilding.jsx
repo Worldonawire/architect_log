@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { getArchitectsQuery, getBuildingsQuery } from "../GraphQL/Queries"
-import { addBuildingMutation } from "../GraphQL/Mutations" 
+import { addBuildingMutation, addArchitectMutation } from "../GraphQL/Mutations" 
 
 
 function AddBuilding() {
@@ -11,6 +11,7 @@ function AddBuilding() {
     const [architectId, setArchitectId] = useState("");
 
     const [addBuilding] = useMutation(addBuildingMutation);
+    const [addArchitect] = useMutation(addArchitectMutation);
 
     const {error, loading, data} = useQuery(getArchitectsQuery);
     console.log(data);
@@ -37,6 +38,8 @@ function AddBuilding() {
     //     console.log("Mutation error: ", error);
     // }
 
+    if (loading) return null;
+    if (error) return `Error! ${error}`;
     return (
         <div>
         
