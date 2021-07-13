@@ -1,1 +1,2 @@
 client/* linguist-vendored=false
+*.jsx linguist-vendored=false
