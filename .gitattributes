@@ -1,2 +1,2 @@
 * linguist-vendored=false
-*.jsx linguist-language=React
+*.js linguist-language=React
