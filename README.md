@@ -1,2 +1,3 @@
-# cc19-solo-mvp-project
-Solo MVP Project
+# Architect's Log
+Web app designed for architecture students to record key information about buildings they have visited.
+
